@@ -8,12 +8,12 @@ export const HorizontalScrollSection = ({ title, items, onItemClick, buttonAlign
         <div className="space-y-3">
             {title && (
                 <div className="flex items-center justify-between px-1">
-                    <h3 className="font-bold text-lg flex items-center gap-2">
+                    <h3 className="font-bold text-[14pt] flex items-center gap-2">
                         {title}
                     </h3>
-                    <button className="text-indigo-600 hover:text-indigo-700 transition-colors">
-                        <ChevronRight size={20} />
-                    </button>
+                    <div className="text-black hover:text-gray-600 transition-colors cursor-pointer">
+                        <ChevronRight size={25} />
+                    </div>
                 </div>
             )}
 

@@ -29,7 +29,7 @@ export const GatheringHub = ({ gatherings, notificationCount }) => {
       <div className="grid grid-cols-2 gap-4 mt-4">
         <button
           className="p-2 rounded-2xl shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center justify-center gap-2 group"
-          style={{ backgroundColor: '#DDCCB5', color: '#47240A' }}>
+          style={{ backgroundColor: '#47240A', color: '#f6f1ebff' }}>
           <div className="bg-white/20 p-3 rounded-full group-hover:scale-110 transition-transform">
             <Bell size={24} />
           </div>
@@ -38,7 +38,7 @@ export const GatheringHub = ({ gatherings, notificationCount }) => {
 
         <button
           onClick={() => setShowMap(true)}
-          style={{ backgroundColor: '#DDCCB5', color: '#47240A' }}
+          style={{ backgroundColor: '#47240A', color: '#f6f1ebff' }}
           className="p-2 rounded-2xl shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center justify-center gap-2 group"
         >
           <div className="bg-white/20 p-3 rounded-full group-hover:scale-110 transition-transform">
@@ -93,9 +93,9 @@ export const GatheringHub = ({ gatherings, notificationCount }) => {
         />
       </div>
 
-      <div className="mt-4">
+      <div className="mt-1">
         <HorizontalScrollSection
-          title="探索附近的聚會"
+          title="你會喜歡的寵團"
           items={gatherings}
           buttonAlign="center"
           onItemClick={handleViewMap}
