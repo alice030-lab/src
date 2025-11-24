@@ -10,7 +10,7 @@ export const PetSwitcher = ({ currentPet, setCurrentPet, pets, overviewObj }) =>
         <LayoutDashboard size={24} className={currentPet.id === 'all' ? 'text-white' : 'text-gray-500'} />
       </div>
       <span className={`text-xs font-bold ${currentPet.id === 'all' ? 'text-slate-900' : 'text-gray-500'}`}>
-        總覽
+        總
       </span>
     </button>
 

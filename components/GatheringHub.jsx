@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Bell, MapPin, Navigation, X } from 'lucide-react';
+import { HorizontalScrollSection } from './HorizontalScrollSection';
 
 export const GatheringHub = ({ gatherings, notificationCount }) => {
   const [showMap, setShowMap] = useState(false);
@@ -24,51 +25,81 @@ export const GatheringHub = ({ gatherings, notificationCount }) => {
         </div>
       </div>
 
-      {/* 地圖快捷入口 */}
-      <div className="mt-4 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl p-4 text-white shadow-lg">
-        <div className="flex items-center justify-between">
-          <div>
-            <h3 className="font-bold text-lg mb-1 flex items-center gap-2">
-              <MapPin size={20} />
-              探索附近聚會
-            </h3>
-            <p className="text-sm text-blue-100">查看地圖上的聚會地點和寵物友善場所</p>
+      {/* 功能按鈕區 */}
+      <div className="grid grid-cols-2 gap-4 mt-4">
+        <button
+          className="p-2 rounded-2xl shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center justify-center gap-2 group"
+          style={{ backgroundColor: '#DDCCB5', color: '#47240A' }}>
+          <div className="bg-white/20 p-3 rounded-full group-hover:scale-110 transition-transform">
+            <Bell size={24} />
           </div>
-          <button
-            onClick={() => setShowMap(true)}
-            className="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-xl font-bold flex items-center gap-2 transition-colors"
-          >
-            <Navigation size={18} />
-            開啟地圖
-          </button>
-        </div>
+          <span className="font-bold">我要舉辦聚會</span>
+        </button>
+
+        <button
+          onClick={() => setShowMap(true)}
+          style={{ backgroundColor: '#DDCCB5', color: '#47240A' }}
+          className="p-2 rounded-2xl shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center justify-center gap-2 group"
+        >
+          <div className="bg-white/20 p-3 rounded-full group-hover:scale-110 transition-transform">
+            <MapPin size={24} />
+          </div>
+          <span className="font-bold">我要參加聚會</span>
+        </button>
       </div>
 
-      <div className="mt-4 space-y-4">
-        {gatherings.map(event => (
-          <div key={event.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            <img src={event.image} className="h-32 w-full object-cover" alt="event" />
-            <div className="p-4">
-              <h3 className="font-bold">{event.title}</h3>
-              <p className="text-xs text-gray-500 mt-1 flex items-center gap-1">
-                <MapPin size={12} />
-                {event.date} @ {event.location}
-              </p>
-              <div className="flex gap-2 mt-3">
-                <button
-                  onClick={() => handleViewMap(event)}
-                  className="flex-1 bg-indigo-50 text-indigo-600 text-sm font-bold py-2 rounded-lg flex items-center justify-center gap-1"
-                >
-                  <MapPin size={14} />
-                  查看地圖
-                </button>
-                <button className="flex-1 bg-indigo-600 text-white text-sm font-bold py-2 rounded-lg">
-                  查看詳情
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
+      {/* 2功能按鈕區 */}
+      <div className="grid grid-cols-4 gap-2 mt-4">
+        <button
+          onClick={() => setShowMap(true)}
+          style={{ backgroundColor: '#DDCCB5', color: '#47240A' }}
+          className="p-2 rounded-2xl shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center justify-center gap-2 group"
+        >
+          <span className="font-bold text-sm">尋找保母</span>
+        </button>
+
+        <button
+          onClick={() => setShowMap(true)}
+          style={{ backgroundColor: '#DDCCB5', color: '#47240A' }}
+          className="p-2 rounded-2xl shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center justify-center gap-2 group"
+        >
+          <span className="font-bold text-sm">來去美麗</span>
+        </button>
+
+        <button
+          onClick={() => setShowMap(true)}
+          style={{ backgroundColor: '#DDCCB5', color: '#47240A' }}
+          className="p-2 rounded-2xl shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center justify-center gap-2 group"
+        >
+          <span className="font-bold text-sm">來去走走</span>
+        </button>
+
+        <button
+          onClick={() => setShowMap(true)}
+          style={{ backgroundColor: '#DDCCB5', color: '#47240A' }}
+          className="p-2 rounded-2xl shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center justify-center gap-2 group"
+        >
+          <span className="font-bold text-sm">寵友社群</span>
+        </button>
+
+      </div>
+
+      <div className="mt-4">
+        <HorizontalScrollSection
+          title="探索附近的聚會"
+          items={gatherings}
+          buttonAlign="center"
+          onItemClick={handleViewMap}
+        />
+      </div>
+
+      <div className="mt-4">
+        <HorizontalScrollSection
+          title="探索附近的聚會"
+          items={gatherings}
+          buttonAlign="center"
+          onItemClick={handleViewMap}
+        />
       </div>
 
       {/* 地圖模態框 */}
