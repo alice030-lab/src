@@ -1,77 +1,102 @@
 import { LayoutDashboard } from 'lucide-react';
 
 export const PetSwitcher = ({ currentPet, setCurrentPet, pets, overviewObj }) => {
-  // 樣式設定中心 - 在這裡調整顏色、大小、間距和對齊
+  // Centralized style configuration
   const styles = {
     overview: {
-      // 總覽按鈕樣式
-      activeBackground: '#FFFFFF', // 啟用時的背景顏色 (白色，不是黑色)
-      activeBorder: '#CBD5E1', // 啟用時的邊框顏色
-      activeIconColor: '#475569', // 啟用時的圖示顏色
-      activeTextColor: '#ffffffff', // 啟用時的文字顏色
-      inactiveBackground: '#E5E7EB', // 未啟用時的背景顏色
-      inactiveIconColor: '#6B7280', // 未啟用時的圖示顏色
-      inactiveTextColor: '#6B7280', // 未啟用時的文字顏色
+      // Overview button styles
+      activeBackground: '#FFFFFF', // white when active (no black)
+      activeBorder: '#CBD5E1',
+      activeIconColor: '#475569',
+      activeTextColor: '#000000',
+      inactiveBackground: '#E5E7EB',
+      inactiveIconColor: '#6B7280',
+      inactiveTextColor: '#6B7280',
     },
     avatar: {
-      size: '56px', // 頭像大小
-      borderWidth: '2px', // 邊框寬度
+      size: '56px', // avatar size
+      borderWidth: '2px', // border width when active
     },
     text: {
-      fontSize: '12px', // 文字大小
-    }
+      fontSize: '12px', // label font size
+    },
   };
 
   return (
     <div className="flex space-x-4 overflow-x-auto pb-2 no-scrollbar px-4">
+      {/* Overview / "All" button */}
       <button
         onClick={() => setCurrentPet(overviewObj)}
-        className={`flex flex-col items-center space-y-1 min-w-[60px] transition-all ${currentPet.id === 'all' ? 'scale-110' : 'opacity-60 hover:opacity-100'}`}
+        className={`flex flex-col items-center space-y-1 min-w-[60px] transition-all ${currentPet.id === 'all' ? 'scale-110' : 'opacity-60 hover:opacity-100'
+          }`}
+        style={{ backgroundColor: 'transparent' }}
       >
         <div
           className="rounded-full p-[2px] flex items-center justify-center"
           style={{
             width: styles.avatar.size,
             height: styles.avatar.size,
-            backgroundColor: currentPet.id === 'all' ? styles.overview.activeBackground : styles.overview.inactiveBackground,
-            border: currentPet.id === 'all' ? `${styles.avatar.borderWidth} solid ${styles.overview.activeBorder}` : 'none'
+            backgroundColor:
+              currentPet.id === 'all'
+                ? styles.overview.activeBackground
+                : styles.overview.inactiveBackground,
+            border:
+              currentPet.id === 'all'
+                ? `${styles.avatar.borderWidth} solid ${styles.overview.activeBorder}`
+                : 'none',
           }}
         >
           <LayoutDashboard
             size={24}
-            style={{ color: currentPet.id === 'all' ? styles.overview.activeIconColor : styles.overview.inactiveIconColor }}
+            style={{
+              color:
+                currentPet.id === 'all'
+                  ? styles.overview.activeIconColor
+                  : styles.overview.inactiveIconColor,
+            }}
           />
         </div>
         <span
           className="font-bold"
           style={{
             fontSize: styles.text.fontSize,
-            color: currentPet.id === 'all' ? styles.overview.activeTextColor : styles.overview.inactiveTextColor
+            color:
+              currentPet.id === 'all'
+                ? styles.overview.activeTextColor
+                : styles.overview.inactiveTextColor,
           }}
         >
           總
         </span>
       </button>
 
+      {/* Individual pet buttons */}
       {pets.map((pet) => (
         <button
           key={pet.id}
           onClick={() => setCurrentPet(pet)}
-          className={`flex flex-col items-center space-y-1 min-w-[60px] transition-all ${currentPet.id === pet.id ? 'scale-110' : 'opacity-60 hover:opacity-100'}`}
+          className={`flex flex-col items-center space-y-1 min-w-[60px] transition-all ${currentPet.id === pet.id ? 'scale-110' : 'opacity-60 hover:opacity-100'
+            }`}
+          style={{ backgroundColor: 'transparent' }}
         >
           <div
-            className={`rounded-full p-[2px] ${currentPet.id === pet.id ? `bg-gradient-to-tr ${pet.themeColor}` : 'bg-gray-200'}`}
+            className={`rounded-full p-[2px] ${currentPet.id === pet.id ? `bg-gradient-to-tr ${pet.themeColor}` : 'bg-gray-200'
+              }`}
             style={{ width: styles.avatar.size, height: styles.avatar.size }}
           >
             <div className="w-full h-full bg-white rounded-full p-[2px]">
-              <img src={pet.avatar} className="w-full h-full rounded-full object-cover" alt={pet.name} />
+              <img
+                src={pet.avatar}
+                alt={pet.name}
+                className="w-full h-full rounded-full object-cover"
+              />
             </div>
           </div>
           <span
             className="font-bold"
             style={{
               fontSize: styles.text.fontSize,
-              color: currentPet.id === pet.id ? '#ffffffff' : '#6B7280'
+              color: currentPet.id === pet.id ? '#000000' : '#6B7280',
             }}
           >
             {pet.name.split(' ')[0]}
@@ -81,5 +106,3 @@ export const PetSwitcher = ({ currentPet, setCurrentPet, pets, overviewObj }) =>
     </div>
   );
 };
-
-
