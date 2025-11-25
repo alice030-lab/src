@@ -1,19 +1,30 @@
 import { MapPin, ChevronRight } from 'lucide-react';
 
-export const HorizontalScrollSection = ({ title, items, onItemClick, buttonAlign = 'center' }) => {
+export const HorizontalScrollSection = ({ title, items, onItemClick, buttonAlign = 'center', titleStyle = {} }) => {
     const alignmentClass = buttonAlign === 'left' ? 'justify-start pl-4' : 'justify-center';
     const textAlignmentClass = buttonAlign === 'left' ? 'text-left pl-4' : 'text-center';
 
     return (
         <div className="space-y-3">
             {title && (
-                <div className="flex items-center justify-between px-1">
-                    <h3 className="font-bold text-[14pt] flex items-center gap-2">
+                <div className="flex items-center justify-between px-1" style={{ justifyContent: titleStyle.textAlign === 'center' ? 'center' : 'space-between' }}>
+                    <h3
+                        className="font-bold flex items-center gap-2"
+                        style={{
+                            fontSize: titleStyle.fontSize || '18.66px', // Default 14pt
+                            color: titleStyle.color,
+                            textAlign: titleStyle.textAlign,
+                            width: titleStyle.textAlign === 'center' ? '100%' : 'auto',
+                            ...titleStyle
+                        }}
+                    >
                         {title}
                     </h3>
-                    <div className="text-black hover:text-gray-600 transition-colors cursor-pointer">
-                        <ChevronRight size={25} />
-                    </div>
+                    {titleStyle.textAlign !== 'center' && (
+                        <div className="text-black hover:text-gray-600 transition-colors cursor-pointer">
+                            <ChevronRight size={25} />
+                        </div>
+                    )}
                 </div>
             )}
 

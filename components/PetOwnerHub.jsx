@@ -30,6 +30,109 @@ export const PetOwnerHub = () => {
     setNewMessage('');
   };
 
+  // 樣式設定中心 - 在這裡調整顏色、大小、間距和對齊
+  const styles = {
+    layout: {
+      paddingTop: '96px', // 上方內距 (避免被標題擋住)
+      paddingBottom: '96px', // 下方內距 (避免被底部導航擋住)
+      paddingX: '16px', // 左右內距
+      sectionSpacing: '24px', // 區塊間距
+    },
+    header: {
+      backgroundColor: 'rgba(255, 255, 255, 0.9)', // 標題欄背景顏色 (半透明)
+      backdropBlur: 'blur(12px)', // 背景模糊
+      borderColor: '#F3F4F6', // 邊框顏色
+      padding: '12px 16px', // 內距
+      titleSize: '20px', // 標題文字大小
+      titleColor: 'transparent', // 標題文字顏色 (使用漸層)
+      gradientFrom: '#4F46E5', // 漸層起始顏色 (indigo-600)
+      gradientTo: '#9333EA', // 漸層結束顏色 (purple-600)
+    },
+    tabs: {
+      // 分頁標籤樣式
+      padding: '12px', // 內距
+      fontSize: '14px', // 文字大小
+      activeColor: '#4F46E5', // 啟用顏色 (indigo-600)
+      inactiveColor: '#9CA3AF', // 未啟用顏色 (gray-400)
+      borderWidth: '2px', // 邊框寬度
+    },
+    profile: {
+      // 個人資料卡片樣式
+      avatarSize: '96px', // 頭像大小
+      avatarBorderWidth: '4px', // 頭像邊框寬度
+      avatarBorderColor: '#E0E7FF', // 頭像邊框顏色 (indigo-100)
+      cardPadding: '24px', // 卡片內距
+      cardBorderRadius: '16px', // 卡片圓角
+      cardShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1)', // 卡片陰影
+    },
+    chat: {
+      // 聊天室樣式
+      bubblePadding: '8px 16px', // 訊息泡泡內距
+      bubbleBorderRadius: '16px', // 訊息泡泡圓角
+      myBubbleColor: '#4F46E5', // 我的訊息背景顏色 (indigo-600)
+      otherBubbleColor: '#FFFFFF', // 他人訊息背景顏色
+      otherBubbleBorder: '#E5E7EB', // 他人訊息邊框顏色
+      inputHeight: '48px', // 輸入框高度
+      avatarSize: '40px', // 頭像大小
+    },
+    settings: {
+      // 設定項目樣式
+      itemPadding: '16px', // 項目內距
+      itemBorderRadius: '16px', // 項目圓角
+      toggleWidth: '48px', // 開關寬度
+      toggleHeight: '24px', // 開關高度
+      toggleBallSize: '20px', // 開關球大小
+    },
+    buttons: {
+      primary: {
+        backgroundColor: '#4F46E5', // 主要按鈕背景顏色 (indigo-600)
+        color: '#FFFFFF', // 文字顏色
+        padding: '8px 16px', // 內距
+        borderRadius: '8px', // 圓角大小
+        fontSize: '14px', // 文字大小
+      },
+      secondary: {
+        backgroundColor: '#EEF2FF', // 次要按鈕背景顏色 (indigo-50)
+        color: '#4F46E5', // 文字顏色 (indigo-600)
+        padding: '8px 16px', // 內距
+        borderRadius: '8px', // 圓角大小
+        fontSize: '14px', // 文字大小
+      },
+      danger: {
+        backgroundColor: '#FEF2F2', // 危險按鈕背景顏色 (red-50)
+        color: '#DC2626', // 文字顏色 (red-600)
+        padding: '12px', // 內距
+        borderRadius: '12px', // 圓角大小
+        fontSize: '16px', // 文字大小
+      },
+      icon: {
+        size: 20, // 圖示大小
+        padding: '8px', // 內距
+        borderRadius: '9999px', // 圓角 (完全圓形)
+      }
+    },
+    text: {
+      heading: '20px', // 標題文字大小
+      body: '14px', // 內文文字大小
+      small: '12px', // 小字文字大小
+      tiny: '10px', // 極小字文字大小
+    },
+    colors: {
+      primary: '#4F46E5', // 主要顏色 (indigo-600)
+      secondary: '#9333EA', // 次要顏色 (purple-600)
+      success: '#10B981', // 成功顏色 (green-500)
+      danger: '#DC2626', // 危險顏色 (red-600)
+      warning: '#F59E0B', // 警告顏色 (amber-500)
+      info: '#3B82F6', // 資訊顏色 (blue-500)
+      background: '#F9FAFB', // 背景顏色 (gray-50)
+      cardBackground: '#FFFFFF', // 卡片背景顏色
+      border: '#E5E7EB', // 邊框顏色 (gray-200)
+      textPrimary: '#1F2937', // 主要文字顏色 (gray-800)
+      textSecondary: '#6B7280', // 次要文字顏色 (gray-500)
+      textLight: '#9CA3AF', // 淺色文字 (gray-400)
+    }
+  };
+
   return (
     <div className="pb-24 bg-gray-50 min-h-screen">
       {/* 頂部導航 */}
@@ -56,31 +159,28 @@ export const PetOwnerHub = () => {
         <div className="flex border-t border-gray-100">
           <button
             onClick={() => setActiveSection('profile')}
-            className={`flex-1 py-3 text-sm font-medium ${
-              activeSection === 'profile'
+            className={`flex-1 py-3 text-sm font-medium ${activeSection === 'profile'
                 ? 'text-indigo-600 border-b-2 border-indigo-600'
                 : 'text-gray-400'
-            }`}
+              }`}
           >
             個人資料
           </button>
           <button
             onClick={() => setActiveSection('chat')}
-            className={`flex-1 py-3 text-sm font-medium ${
-              activeSection === 'chat'
+            className={`flex-1 py-3 text-sm font-medium ${activeSection === 'chat'
                 ? 'text-indigo-600 border-b-2 border-indigo-600'
                 : 'text-gray-400'
-            }`}
+              }`}
           >
             聊天室
           </button>
           <button
             onClick={() => setActiveSection('settings')}
-            className={`flex-1 py-3 text-sm font-medium ${
-              activeSection === 'settings'
+            className={`flex-1 py-3 text-sm font-medium ${activeSection === 'settings'
                 ? 'text-indigo-600 border-b-2 border-indigo-600'
                 : 'text-gray-400'
-            }`}
+              }`}
           >
             設置
           </button>
@@ -176,11 +276,10 @@ export const PetOwnerHub = () => {
                       <p className="text-xs text-gray-500 mb-1">{msg.sender}</p>
                     )}
                     <div
-                      className={`inline-block px-4 py-2 rounded-2xl ${
-                        msg.isMe
+                      className={`inline-block px-4 py-2 rounded-2xl ${msg.isMe
                           ? 'bg-indigo-600 text-white'
                           : 'bg-white text-gray-800 border border-gray-200'
-                      }`}
+                        }`}
                     >
                       <p className="text-sm">{msg.message}</p>
                       <p className={`text-[10px] mt-1 ${msg.isMe ? 'text-indigo-100' : 'text-gray-400'}`}>
@@ -230,14 +329,12 @@ export const PetOwnerHub = () => {
                   <span className="text-sm text-gray-700">推送通知</span>
                   <button
                     onClick={() => setNotifications(!notifications)}
-                    className={`w-12 h-6 rounded-full transition-colors ${
-                      notifications ? 'bg-indigo-600' : 'bg-gray-300'
-                    }`}
+                    className={`w-12 h-6 rounded-full transition-colors ${notifications ? 'bg-indigo-600' : 'bg-gray-300'
+                      }`}
                   >
                     <div
-                      className={`w-5 h-5 bg-white rounded-full transition-transform ${
-                        notifications ? 'translate-x-6' : 'translate-x-1'
-                      }`}
+                      className={`w-5 h-5 bg-white rounded-full transition-transform ${notifications ? 'translate-x-6' : 'translate-x-1'
+                        }`}
                     />
                   </button>
                 </div>
@@ -257,14 +354,12 @@ export const PetOwnerHub = () => {
                   </div>
                   <button
                     onClick={() => setDarkMode(!darkMode)}
-                    className={`w-12 h-6 rounded-full transition-colors ${
-                      darkMode ? 'bg-indigo-600' : 'bg-gray-300'
-                    }`}
+                    className={`w-12 h-6 rounded-full transition-colors ${darkMode ? 'bg-indigo-600' : 'bg-gray-300'
+                      }`}
                   >
                     <div
-                      className={`w-5 h-5 bg-white rounded-full transition-transform ${
-                        darkMode ? 'translate-x-6' : 'translate-x-1'
-                      }`}
+                      className={`w-5 h-5 bg-white rounded-full transition-transform ${darkMode ? 'translate-x-6' : 'translate-x-1'
+                        }`}
                     />
                   </button>
                 </div>
