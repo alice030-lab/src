@@ -11,6 +11,7 @@ export const MOCK_PETS = [
         themeColor: "from-orange-400 to-amber-500",
         stats: { weight: "12.5 kg", sleep: "8.5 hr", activity: "4,200 步" },
         deviceStatus: { feeder: 15, water: 98, temp: 26 },
+        sound: "汪汪!",
         rawStats: {
             taskCompletion: 90,
             interaction: 95,
@@ -29,6 +30,7 @@ export const MOCK_PETS = [
         themeColor: "from-blue-400 to-indigo-500",
         stats: { weight: "4.2 kg", sleep: "14.0 hr", activity: "低 (室內)" },
         deviceStatus: { feeder: 80, water: 65, temp: 24 },
+        sound: "喵~",
         rawStats: {
             taskCompletion: 85,
             interaction: 90,
@@ -47,6 +49,7 @@ export const MOCK_PETS = [
         themeColor: "from-green-500 to-emerald-700",
         stats: { weight: "850 g", sleep: "10.0 hr", activity: "曬背中" },
         deviceStatus: { feeder: 95, water: 90, temp: 32 },
+        sound: "...",
         rawStats: {
             taskCompletion: 98,
             interaction: 70,
@@ -65,6 +68,7 @@ export const MOCK_PETS = [
         themeColor: "from-yellow-400 to-orange-500",
         stats: { weight: "28.0 kg", sleep: "9.0 hr", activity: "8,500 步" },
         deviceStatus: { feeder: 40, water: 88, temp: 25 },
+        sound: "汪!",
         rawStats: {
             taskCompletion: 60,
             interaction: 80,

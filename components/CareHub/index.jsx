@@ -125,7 +125,7 @@ export const CareHub = ({
             <div>
               <h2 className="text-2xl font-bold flex items-center gap-2 mb-3">
                 {currentPet.type === 'reptile' ? <Thermometer size={24} /> : <Smartphone size={24} />}
-                AI 智能管家
+                {currentPet.name} {currentPet.sound}
               </h2>
 
               <div className="bg-white/20 backdrop-blur-md p-3 rounded-xl border border-white/20 flex justify-between items-start mb-6">

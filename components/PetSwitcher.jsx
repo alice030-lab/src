@@ -4,7 +4,6 @@ export const PetSwitcher = ({ currentPet, setCurrentPet, pets, overviewObj }) =>
   // Centralized style configuration
   const styles = {
     overview: {
-      // Overview button styles
       activeBackground: '#FFFFFF', // white when active (no black)
       activeBorder: '#CBD5E1',
       activeIconColor: '#475569',
@@ -27,8 +26,7 @@ export const PetSwitcher = ({ currentPet, setCurrentPet, pets, overviewObj }) =>
       {/* Overview / "All" button */}
       <button
         onClick={() => setCurrentPet(overviewObj)}
-        className={`flex flex-col items-center space-y-1 min-w-[60px] transition-all ${currentPet.id === 'all' ? 'scale-110' : 'opacity-60 hover:opacity-100'
-          }`}
+        className={`flex flex-col items-center space-y-1 min-w-[60px] transition-all ${currentPet.id === 'all' ? 'scale-110' : 'opacity-60 hover:opacity-100'}`}
         style={{ backgroundColor: 'transparent' }}
       >
         <div
@@ -56,18 +54,7 @@ export const PetSwitcher = ({ currentPet, setCurrentPet, pets, overviewObj }) =>
             }}
           />
         </div>
-        <span
-          className="font-bold"
-          style={{
-            fontSize: styles.text.fontSize,
-            color:
-              currentPet.id === 'all'
-                ? styles.overview.activeTextColor
-                : styles.overview.inactiveTextColor,
-          }}
-        >
-          總
-        </span>
+        {/* Name span removed as per user request */}
       </button>
 
       {/* Individual pet buttons */}
@@ -75,32 +62,18 @@ export const PetSwitcher = ({ currentPet, setCurrentPet, pets, overviewObj }) =>
         <button
           key={pet.id}
           onClick={() => setCurrentPet(pet)}
-          className={`flex flex-col items-center space-y-1 min-w-[60px] transition-all ${currentPet.id === pet.id ? 'scale-110' : 'opacity-60 hover:opacity-100'
-            }`}
+          className={`flex flex-col items-center space-y-1 min-w-[60px] transition-all ${currentPet.id === pet.id ? 'scale-110' : 'opacity-60 hover:opacity-100'}`}
           style={{ backgroundColor: 'transparent' }}
         >
           <div
-            className={`rounded-full p-[2px] ${currentPet.id === pet.id ? `bg-gradient-to-tr ${pet.themeColor}` : 'bg-gray-200'
-              }`}
+            className={`rounded-full p-[2px] ${currentPet.id === pet.id ? `bg-gradient-to-tr ${pet.themeColor}` : 'bg-gray-200'}`}
             style={{ width: styles.avatar.size, height: styles.avatar.size }}
           >
             <div className="w-full h-full bg-white rounded-full p-[2px]">
-              <img
-                src={pet.avatar}
-                alt={pet.name}
-                className="w-full h-full rounded-full object-cover"
-              />
+              <img src={pet.avatar} alt={pet.name} className="w-full h-full rounded-full object-cover" />
             </div>
           </div>
-          <span
-            className="font-bold"
-            style={{
-              fontSize: styles.text.fontSize,
-              color: currentPet.id === pet.id ? '#000000' : '#6B7280',
-            }}
-          >
-            {pet.name.split(' ')[0]}
-          </span>
+          {/* Name span removed as per user request */}
         </button>
       ))}
     </div>
