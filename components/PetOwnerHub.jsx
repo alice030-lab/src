@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {
   User, Settings, MessageCircle, Bell, Shield, Palette, Moon, Sun, Globe,
-  LogOut, Edit3, Camera, Save, X, Send, Smile, Paperclip
+  LogOut, Edit3, Camera, Save, X, Send, Smile, Paperclip, Dog, Search
 } from 'lucide-react';
 
 export const PetOwnerHub = () => {
@@ -49,20 +49,87 @@ export const PetOwnerHub = () => {
     };
     setChatMessages(updatedMessages);
     setNewMessage('');
+    setNewMessage('');
+  };
+
+  // 樣式設定中心 - 參考 GatheringHub
+  const styles = {
+    layout: {
+      paddingTop: '40px',
+    },
+    header: {
+      backgroundColor: '#86572C',
+      padding: '12px 16px',
+      titleSize: '13.33px',
+      titleColor: '#FFFFFF',
+    },
+    searchBar: {
+      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+      textColor: '#FFFFFF',
+      placeholderColor: 'rgba(255, 255, 255, 0.7)',
+      width: '112px',
+      height: '28px',
+      fontSize: '14px',
+    },
   };
 
   return (
     <div className="pb-24 bg-gray-50 min-h-screen">
       {/* 頂部導航 */}
-      <div className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md z-40 border-b border-gray-100">
-        <div className="px-4 py-3">
-          <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+      {/* 頂部導航 */}
+      <div
+        className="fixed top-0 left-0 right-0 z-40 flex justify-between items-center shadow-md"
+        style={{
+          backgroundColor: styles.header.backgroundColor,
+          padding: styles.header.padding
+        }}
+      >
+        <div className="flex items-center gap-2" style={{ flex: 1 }}>
+          <Dog className="text-white" size={24} style={{ marginRight: '8px' }} />
+          <h1
+            className="font-bold"
+            style={{
+              fontSize: styles.header.titleSize,
+              color: styles.header.titleColor,
+            }}
+          >
             寵主中心
           </h1>
         </div>
+        <div className="flex items-center gap-3">
+          <div className="relative">
+            <Bell className="text-white" />
+            {notifications && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                3
+              </span>
+            )}
+          </div>
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="搜尋..."
+              className="rounded-full px-3 focus:outline-none focus:ring-2 focus:ring-white/50"
+              style={{
+                backgroundColor: styles.searchBar.backgroundColor,
+                color: styles.searchBar.textColor,
+                width: styles.searchBar.width,
+                height: styles.searchBar.height,
+                fontSize: styles.searchBar.fontSize,
+                '--placeholder-color': styles.searchBar.placeholderColor
+              }}
+            />
+            <style jsx>{`
+              input::placeholder {
+                color: ${styles.searchBar.placeholderColor};
+              }
+            `}</style>
+            <Search className="absolute right-2 top-1.5 text-white/70" size={14} />
+          </div>
+        </div>
       </div>
 
-      <div className="pt-16 px-4 space-y-6">
+      <div className="pt-16 px-4 space-y-6" style={{ paddingTop: styles.layout.paddingTop }}>
         {/* 個人資料區 */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
           <div className="flex flex-col items-center">

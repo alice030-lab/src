@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Image as ImageIcon, Edit3, Palette, X, Save, Sticker } from 'lucide-react';
+import { Image as ImageIcon, Edit3, Palette, X, Save, Sticker, Dog, Plus, Printer, Calendar } from 'lucide-react';
 import { PetSwitcher } from '../PetSwitcher';
 import { MOCK_PETS, OVERVIEW_OBJ } from '../../data/mockData';
 
@@ -106,23 +106,70 @@ export const PhotoAlbum = ({ currentPet, setCurrentPet, memories, setMemories })
     );
   };
 
+  // 樣式設定中心 - 參考 GatheringHub
+  const styles = {
+    layout: {
+      paddingTop: '40px',
+    },
+    header: {
+      backgroundColor: '#86572C',
+      padding: '12px 16px',
+      titleSize: '13.33px',
+      titleColor: '#FFFFFF',
+    },
+  };
+
   return (
     <div className="pb-24 bg-[#f8f5f2] min-h-screen relative">
-      <div className="sticky top-0 bg-[#f8f5f2]/90 backdrop-blur-sm z-40 pt-4 pb-2 border-b border-stone-200">
-        <div className="flex justify-between items-center px-6 mb-4">
-          <h2 className="text-2xl font-serif font-bold text-stone-700">時光相冊</h2>
-          <div className="flex gap-2">
-            {['2023', '2022'].map(year => (
-              <button
-                key={year}
-                onClick={() => setSelectedYear(year)}
-                className={`px-4 py-1 rounded-full text-sm font-bold transition-all ${selectedYear === year ? 'bg-stone-800 text-white shadow-md' : 'bg-white text-stone-400'}`}
-              >
-                {year}
-              </button>
-            ))}
-          </div>
+      {/* 頂部導航 */}
+      <div
+        className="fixed top-0 left-0 right-0 z-40 flex justify-between items-center shadow-md"
+        style={{
+          backgroundColor: styles.header.backgroundColor,
+          padding: styles.header.padding
+        }}
+      >
+        <div className="flex items-center gap-2" style={{ flex: 1 }}>
+          <Dog className="text-white" size={24} style={{ marginRight: '8px' }} />
+          <h1
+            className="font-bold"
+            style={{
+              fontSize: styles.header.titleSize,
+              color: styles.header.titleColor,
+            }}
+          >
+            時光相冊
+          </h1>
         </div>
+        <div className="flex items-center gap-3">
+          <div className="relative group">
+            <button className="p-2 bg-white/10 rounded-full text-white hover:bg-white/20 transition-colors flex items-center gap-1">
+              <Calendar size={20} />
+              <span className="text-xs">{selectedYear}</span>
+            </button>
+            {/* 簡單的年份選擇下拉選單模擬 */}
+            <div className="absolute top-full right-0 mt-2 bg-white rounded-xl shadow-xl overflow-hidden hidden group-hover:block min-w-[100px]">
+              {['2023', '2022'].map(year => (
+                <button
+                  key={year}
+                  onClick={() => setSelectedYear(year)}
+                  className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 ${selectedYear === year ? 'text-indigo-600 font-bold' : 'text-gray-600'}`}
+                >
+                  {year}
+                </button>
+              ))}
+            </div>
+          </div>
+          <button className="p-2 bg-white/10 rounded-full text-white hover:bg-white/20 transition-colors">
+            <Plus size={20} />
+          </button>
+          <button className="p-2 bg-white/10 rounded-full text-white hover:bg-white/20 transition-colors">
+            <Printer size={20} />
+          </button>
+        </div>
+      </div>
+
+      <div className="sticky top-0 bg-[#f8f5f2]/90 backdrop-blur-sm z-30 pt-4 pb-2 border-b border-stone-200" style={{ marginTop: styles.layout.paddingTop }}>
         <PetSwitcher currentPet={currentPet} setCurrentPet={setCurrentPet} pets={MOCK_PETS} overviewObj={OVERVIEW_OBJ} />
       </div>
 

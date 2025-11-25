@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {
   LayoutDashboard, Activity, Smartphone, Thermometer, Volume2, Trophy, Heart, Users, Smile,
   Wifi, Utensils, Battery, Droplet, ShoppingBag, Stethoscope, Sparkles, Loader2, PlusCircle,
-  AlertCircle, AlertTriangle, CheckCircle, ChevronDown, ClipboardList
+  AlertCircle, AlertTriangle, CheckCircle, ChevronDown, ClipboardList, Dog, Plus, FileText
 } from 'lucide-react';
 import { PetSwitcher } from '../PetSwitcher';
 import { ReportModal } from '../ReportModal';
@@ -84,14 +84,60 @@ export const CareHub = ({
     if (currentPet.type === 'cat') return `主子 ${currentPet.name.split(' ')[0]} 昨晚跑酷了 2 次，現在正在補眠。`;
     if (currentPet.type === 'reptile') return `${currentPet.name.split(' ')[0]} 的保溫箱目前 ${deviceStatus.temp}°C，濕度適中，適合曬背。`;
     return '早安！記得查看您的寵物狀態。';
+    return '早安！記得查看您的寵物狀態。';
   })();
+
+  // 樣式設定中心 - 參考 GatheringHub
+  const styles = {
+    layout: {
+      paddingTop: '40px',
+    },
+    header: {
+      backgroundColor: '#86572C',
+      padding: '12px 16px',
+      titleSize: '13.33px',
+      titleColor: '#FFFFFF',
+    },
+  };
 
   return (
     <div className="pb-24 bg-slate-50 min-h-screen">
       <ReportModal healthReport={healthReport} currentPet={currentPet} setHealthReport={setHealthReport} />
 
+      <ReportModal healthReport={healthReport} currentPet={currentPet} setHealthReport={setHealthReport} />
+
+      {/* 頂部導航 */}
+      <div
+        className="fixed top-0 left-0 right-0 z-40 flex justify-between items-center shadow-md"
+        style={{
+          backgroundColor: styles.header.backgroundColor,
+          padding: styles.header.padding
+        }}
+      >
+        <div className="flex items-center gap-2" style={{ flex: 1 }}>
+          <Dog className="text-white" size={24} style={{ marginRight: '8px' }} />
+          <h1
+            className="font-bold"
+            style={{
+              fontSize: styles.header.titleSize,
+              color: styles.header.titleColor,
+            }}
+          >
+            寵物管家
+          </h1>
+        </div>
+        <div className="flex items-center gap-3">
+          <button className="p-2 bg-white/10 rounded-full text-white hover:bg-white/20 transition-colors">
+            <Plus size={20} />
+          </button>
+          <button className="p-2 bg-white/10 rounded-full text-white hover:bg-white/20 transition-colors">
+            <FileText size={20} />
+          </button>
+        </div>
+      </div>
+
       {/* 頂部卡片 */}
-      <div className={`bg-gradient-to-br ${currentPet.themeColor} rounded-b-[2.5rem] pb-6 pt-10 text-white shadow-xl relative overflow-hidden transition-all duration-500`}>
+      <div className={`bg-gradient-to-br ${currentPet.themeColor} rounded-b-[2.5rem] pb-6 pt-10 text-white shadow-xl relative overflow-hidden transition-all duration-500`} style={{ marginTop: styles.layout.paddingTop }}>
         <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -translate-y-10 translate-x-10"></div>
         <div className="mb-6 relative z-10">
           <p className="px-6 text-white/80 text-xs font-bold mb-3 uppercase tracking-wider">
