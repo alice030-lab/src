@@ -186,11 +186,11 @@ export const CareHub = ({
                 家庭狀況看板
               </h2>
               <div className="mt-4 grid grid-cols-2 gap-3">
-                <div className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-color: '#86572C'">
+                <div className="bg-white/70 backdrop-blur-md p-4 rounded-xl border border-color: '#86572C'">
                   <p style={{ color: '#86572C', fontSize: '12px' }}>寵物總數</p>
                   <p className="font-bold" style={{ fontSize: '24px' }}>{totalPets} <span style={{ fontSize: styles.card.textSize, fontWeight: 'normal' }}>隻</span></p>
                 </div>
-                <div className={`p-4 rounded-xl border backdrop-blur-md ${urgentCount > 0 ? 'border-color: #86572C ' : 'border-color: #86572C '}`}>
+                <div className={`p-4 rounded-xl bg-white/70 border backdrop-blur-md ${urgentCount > 0 ? 'border-color: #86572C ' : 'border-color: #86572C '}`}>
                   <p style={{ color: '#86572C', fontSize: '12px' }}>待處理事項</p>
                   <p className="font-bold flex items-center gap-2" style={{ fontSize: '24px' }}>
                     {urgentCount} <span style={{ fontSize: styles.card.textSize, fontWeight: 'normal' }}>項緊急</span>
@@ -209,7 +209,7 @@ export const CareHub = ({
                 {currentPet.name} {currentPet.sound}
               </h2>
 
-              <div className="bg-white/20 backdrop-blur-md p-3 rounded-xl border border-white/20 flex justify-between items-start mb-6">
+              <div className="bg-white/70 backdrop-blur-md p-3 rounded-xl border border-'#86572C' flex justify-between items-start mb-6">
                 <p className="leading-relaxed pr-2" style={{ color: styles.card.textColor, fontSize: styles.card.textSize }}>
                   <span className="text-base mr-1">🤖</span>
                   {assistantMessage}
