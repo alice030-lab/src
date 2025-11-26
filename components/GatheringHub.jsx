@@ -42,7 +42,7 @@ export const GatheringHub = ({ gatherings, notificationCount }) => {
         padding: '8px', // 內距
         borderRadius: '28px', // 圓角大小
         fontSize: '16px', // 文字大小
-        iconSize: 24, // 圖示大小
+        iconSize: 20, // 圖示大小
         textAlign: 'center', // 文字對齊 (left, center, right)
       },
       secondary: { // 次要按鈕 (尋找保母等)
@@ -142,7 +142,7 @@ export const GatheringHub = ({ gatherings, notificationCount }) => {
           }}
         >
           <button
-            className="shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center justify-center gap-2 group"
+            className="shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-4 group"
             style={{
               backgroundColor: styles.actionButtons.primary.backgroundColor,
               color: styles.actionButtons.primary.color,
@@ -167,7 +167,7 @@ export const GatheringHub = ({ gatherings, notificationCount }) => {
 
           <button
             onClick={() => setShowMap(true)}
-            className="shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center justify-center gap-2 group"
+            className="shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-2 group"
             style={{
               backgroundColor: styles.actionButtons.primary.backgroundColor,
               color: styles.actionButtons.primary.color,
