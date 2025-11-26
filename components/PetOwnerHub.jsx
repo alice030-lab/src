@@ -60,7 +60,7 @@ export const PetOwnerHub = () => {
     header: {
       backgroundColor: '#86572C',
       padding: '12px 16px',
-      titleSize: '13.33px',
+      titleSize: '14px',
       titleColor: '#FFFFFF',
     },
     searchBar: {

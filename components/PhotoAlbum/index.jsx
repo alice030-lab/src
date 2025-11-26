@@ -113,8 +113,8 @@ export const PhotoAlbum = ({ currentPet, setCurrentPet, memories, setMemories })
     },
     header: {
       backgroundColor: '#86572C',
-      padding: '12px 16px',
-      titleSize: '13.33px',
+      padding: '6px 16px',
+      titleSize: '14px',
       titleColor: '#FFFFFF',
     },
   };
@@ -143,7 +143,10 @@ export const PhotoAlbum = ({ currentPet, setCurrentPet, memories, setMemories })
         </div>
         <div className="flex items-center gap-3">
           <div className="relative group">
-            <button className="p-2 bg-white/10 rounded-full text-white hover:bg-white/20 transition-colors flex items-center gap-1">
+            <button
+              className="p-2 rounded-full text-white hover:bg-white/10 transition-colors flex items-center gap-1"
+              style={{ backgroundColor: 'transparent' }}
+            >
               <Calendar size={20} />
               <span className="text-xs">{selectedYear}</span>
             </button>
@@ -160,10 +163,16 @@ export const PhotoAlbum = ({ currentPet, setCurrentPet, memories, setMemories })
               ))}
             </div>
           </div>
-          <button className="p-2 bg-white/10 rounded-full text-white hover:bg-white/20 transition-colors">
+          <button
+            className="p-2 rounded-full text-white hover:bg-white/10 transition-colors"
+            style={{ backgroundColor: 'transparent' }}
+          >
             <Plus size={20} />
           </button>
-          <button className="p-2 bg-white/10 rounded-full text-white hover:bg-white/20 transition-colors">
+          <button
+            className="p-2 rounded-full text-white hover:bg-white/10 transition-colors"
+            style={{ backgroundColor: 'transparent' }}
+          >
             <Printer size={20} />
           </button>
         </div>
