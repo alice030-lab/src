@@ -84,8 +84,14 @@ export const CareHub = ({
     if (currentPet.type === 'cat') return `主子 ${currentPet.name.split(' ')[0]} 昨晚跑酷了 2 次，現在正在補眠。`;
     if (currentPet.type === 'reptile') return `${currentPet.name.split(' ')[0]} 的保溫箱目前 ${deviceStatus.temp}°C，濕度適中，適合曬背。`;
     return '早安！記得查看您的寵物狀態。';
-    return '早安！記得查看您的寵物狀態。';
   })();
+
+  // 根據數值決定進度條顏色
+  const getStatColor = (value) => {
+    if (value >= 70) return 'bg-[#579F87]'; // 良好 (70-100)
+    if (value >= 40) return 'bg-[#B68E39]'; // 中等 (40-69)
+    return 'bg-[#B1543D]'; // 緊急 (0-39)
+  };
 
   // 樣式設定中心 - 參考 GatheringHub
   const styles = {
@@ -230,10 +236,10 @@ export const CareHub = ({
                   </div>
 
                   <div className="grid grid-cols-2 gap-x-6 gap-y-2">
-                    <StatBar label="信任值" value={gameStats.trust} color="bg-pink-400" icon={Heart} textColor={styles.card.textColor} />
-                    <StatBar label="健康值" value={gameStats.health} color="bg-emerald-400" icon={Activity} textColor={styles.card.textColor} />
-                    <StatBar label="快樂值" value={gameStats.happiness} color="bg-yellow-400" icon={Smile} textColor={styles.card.textColor} />
-                    <StatBar label="社交值" value={gameStats.social} color="bg-blue-400" icon={Users} textColor={styles.card.textColor} />
+                    <StatBar label="信任值" value={gameStats.trust} color={getStatColor(gameStats.trust)} icon={Heart} textColor={styles.card.textColor} />
+                    <StatBar label="健康值" value={gameStats.health} color={getStatColor(gameStats.health)} icon={Activity} textColor={styles.card.textColor} />
+                    <StatBar label="快樂值" value={gameStats.happiness} color={getStatColor(gameStats.happiness)} icon={Smile} textColor={styles.card.textColor} />
+                    <StatBar label="社交值" value={gameStats.social} color={getStatColor(gameStats.social)} icon={Users} textColor={styles.card.textColor} />
                   </div>
                 </div>
               )}
