@@ -382,9 +382,10 @@ export const CareHub = ({
                 <Stethoscope size={20} className="text-teal-500" />
                 健康護照
               </h3>
-              <div className="flex gap-2">
+              <div className="flex gap-2" >
                 {healthItems.length > 0 && (
                   <button
+                    style={{ backgroundColor: '#86572C' }}
                     onClick={handleGenerateReport}
                     disabled={isReportLoading}
                     className={`text-sm font-medium px-2 py-1 rounded-lg border border-indigo-100 flex items-center gap-1 transition-all ${isReportLoading ? 'bg-indigo-200 text-indigo-700' : 'bg-indigo-100 text-indigo-600 hover:bg-indigo-200'}`}
@@ -396,14 +397,13 @@ export const CareHub = ({
                       </>
                     ) : (
                       <>
-                        <Sparkles size={12} />
-                        AI 報告分析
+                        AI分析
                       </>
                     )}
                   </button>
                 )}
-                <button className="text-teal-600 text-xs font-medium bg-teal-50 px-2 py-1 rounded-lg border border-teal-100 flex items-center gap-1">
-                  <PlusCircle size={12} /> 新增紀錄
+                <button style={{ backgroundColor: '#86572C' }} className="text-teal-600 text-xs font-medium bg-teal-50 px-2 py-1 rounded-lg border border-teal-100 flex items-center gap-1">
+                  新增紀錄
                 </button>
               </div>
             </div>
@@ -431,7 +431,7 @@ export const CareHub = ({
             )}
 
             {scheduledItems.length > 0 && (
-              <div className="mb-8">
+              <div className="mb-8" >
                 <button
                   onClick={() => setIsPassportOpen(!isPassportOpen)}
                   className={`w-full flex justify-between items-center p-4 rounded-xl font-bold transition-all duration-300 ${isPassportOpen ? 'bg-teal-600 text-white shadow-lg' : 'bg-white text-teal-600 border border-slate-200 hover:bg-teal-50'}`}
