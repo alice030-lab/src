@@ -96,7 +96,8 @@ export const CareHub = ({
   // 樣式設定中心 - 參考 GatheringHub
   const styles = {
     layout: {
-      paddingTop: '20px',
+      paddingTop: '-10px',
+      backgroundColor: '#fff5ebff',
     },
     header: {
       backgroundColor: '#86572C',
@@ -114,9 +115,8 @@ export const CareHub = ({
   };
 
   return (
-    <div className="pb-24 bg-slate-50 min-h-screen">
-      <ReportModal healthReport={healthReport} currentPet={currentPet} setHealthReport={setHealthReport} />
-
+    <div className="pb-24 min-h-screen"
+      style={{ backgroundColor: styles.layout.backgroundColor }}>
       <ReportModal healthReport={healthReport} currentPet={currentPet} setHealthReport={setHealthReport} />
 
       {/* 頂部導航 */}
@@ -157,10 +157,10 @@ export const CareHub = ({
 
       {/* 頂部卡片 */}
       <div
-        className="rounded-b-[2.5rem] pb-6 pt-10 shadow-xl relative overflow-hidden transition-all duration-500"
+        className="rounded-b-[2.5rem] pb-6 pt-10 shadow-x2 relative overflow-hidden transition-all duration-500"
         style={{
           marginTop: styles.layout.paddingTop,
-          backgroundColor: styles.card.backgroundColor,
+          backgroundColor: '#e5d2beff',
           color: styles.card.textColor
         }}
       >
@@ -170,7 +170,7 @@ export const CareHub = ({
             className="px-6 font-bold mb-3 uppercase tracking-wider"
             style={{ color: styles.card.subTextColor, fontSize: '16px' }}
           >
-            {isOverview && '選擇您的毛孩'}
+            {/* {isOverview && '選擇您的毛孩'} */}
           </p>
           <PetSwitcher currentPet={currentPet} setCurrentPet={setCurrentPet} pets={MOCK_PETS} overviewObj={overviewObj} />
         </div>
@@ -180,7 +180,7 @@ export const CareHub = ({
             <div>
               <h2
                 className="font-bold flex items-center gap-2"
-                style={{ fontSize: styles.card.titleSize }}
+                style={{ fontSize: styles.card.titleSize, color: '#47240A' }}
               >
                 <LayoutDashboard size={24} />
                 家庭狀況看板
@@ -203,28 +203,54 @@ export const CareHub = ({
             <div>
               <h2
                 className="font-bold flex items-center gap-2 mb-3"
-                style={{ fontSize: styles.card.titleSize }}
+                style={{ fontSize: styles.card.titleSize, color: '#47240A' }}
               >
                 {currentPet.type === 'reptile' ? <Thermometer size={24} /> : <Smartphone size={24} />}
                 {currentPet.name} {currentPet.sound}
               </h2>
 
-              <div className="bg-white/70 backdrop-blur-md p-3 rounded-xl border border-'#86572C' flex justify-between items-start mb-6">
-                <p className="leading-relaxed pr-2" style={{ color: styles.card.textColor, fontSize: styles.card.textSize }}>
-                  <span className="text-base mr-1">🤖</span>
-                  {assistantMessage}
-                </p>
-                <button
-                  onClick={handleSpeak}
-                  disabled={isSpeaking}
-                  className={`p-1.5 rounded-full transition-colors ${isSpeaking ? 'bg-white/40 animate-pulse' : 'bg-white/10 hover:bg-white/20'}`}
-                >
-                  <Volume2 size={16} />
-                </button>
-              </div>
+              {/* --- 修改開始：助手插圖與對話框區域 --- */}
+              <div className="flex items-start gap-3 mb 0 px-2 pb-2">
 
+                {/* 左側：插圖角色 */}
+                <div className="w-24 flex-shrink-0 relative z-10 translate-y12">
+                  <img
+                    src="https://i.meee.com.tw/MUEnaER.png"
+                    alt="Assistant"
+                    className="w-full object-contain drop-shadow-md transform scale-110 -mb-2"
+                  />
+                </div>
+
+                {/* 右側：對話氣泡 */}
+                <div
+                  className="flex-1 bg-[#fdfbf7] p-4 rounded-2xl rounded-bl-none shadow-sm relative border border-[#E6D5C3]"
+                  style={{
+                    // 這裡模擬截圖中的立體邊框感
+                    boxShadow: '0 4px 6px -1px rgba(134, 87, 44, 0.1), 0 2px 4px -1px rgba(134, 87, 44, 0.06)'
+                  }}
+                >
+                  {/* 氣泡的小尾巴 (指向左下角角色) */}
+                  <div
+                    className="absolute bottom-0 -left-2 w-4 h-4 bg-[#fdfbf7] border-b border-l border-[#E6D5C3]"
+                    style={{
+                      clipPath: 'polygon(100% 0, 100% 100%, 0% 100%)' // 裁切成三角形
+                    }}
+                  ></div>
+
+                  {/* 內容區域 */}
+                  <div className="flex justify-between items-start">
+                    <p
+                      className="leading-relaxed pr-2 font-bold text-sm tracking-wide"
+                      style={{ color: '#86572C' }} // 使用截圖中的深棕色文字
+                    >
+                      {assistantMessage}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* --- 修改結束 --- */}
               {gameStats && (
-                <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 border border-#86572C">
+                <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-4 border border-#86572C relative z-20">
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="font-bold text-sm flex items-center gap-2">
                       <Trophy size={16} className="text-#86572C" />
@@ -385,7 +411,7 @@ export const CareHub = ({
               <div className="flex gap-2" >
                 {healthItems.length > 0 && (
                   <button
-                    style={{ backgroundColor: '#86572C' }}
+                    style={{ backgroundColor: '#d1b59aff' }}
                     onClick={handleGenerateReport}
                     disabled={isReportLoading}
                     className={`text-sm font-medium px-2 py-1 rounded-lg border border-indigo-100 flex items-center gap-1 transition-all ${isReportLoading ? 'bg-indigo-200 text-indigo-700' : 'bg-indigo-100 text-indigo-600 hover:bg-indigo-200'}`}
@@ -402,19 +428,21 @@ export const CareHub = ({
                     )}
                   </button>
                 )}
-                <button style={{ backgroundColor: '#86572C' }} className="text-teal-600 text-xs font-medium bg-teal-50 px-2 py-1 rounded-lg border border-teal-100 flex items-center gap-1">
+                <button style={{ backgroundColor: '#d1b59aff' }} className="text-teal-600 text-xs font-medium bg-teal-50 px-2 py-1 rounded-lg border border-teal-100 flex items-center gap-1">
                   新增紀錄
                 </button>
               </div>
+
             </div>
 
             {urgentItems.length > 0 && (
-              <div className="bg-red-50 p-4 rounded-xl shadow-md mb-6 border-l-4 border-red-500">
+              <div style={{ backgroundColor: '#ffffffff' }} className="p-4 rounded-xl shadow-md mb-6 border-l-4 border-#d1b59aff">
                 <h4 className="flex items-center text-sm font-bold text-red-600 mb-3">
                   <AlertCircle size={16} className="mr-1" />
                   建議立即回診/追蹤項目
                 </h4>
                 <div className="space-y-3">
+
                   {urgentItems.map(item => (
                     <div key={item.id} className="flex justify-between items-center p-3 bg-white rounded-lg border border-red-200 shadow-sm">
                       <div>
@@ -434,7 +462,10 @@ export const CareHub = ({
               <div className="mb-8" >
                 <button
                   onClick={() => setIsPassportOpen(!isPassportOpen)}
-                  className={`w-full flex justify-between items-center p-4 rounded-xl font-bold transition-all duration-300 ${isPassportOpen ? 'bg-teal-600 text-white shadow-lg' : 'bg-white text-teal-600 border border-slate-200 hover:bg-teal-50'}`}
+                  className={`w-full flex justify-between items-center p-4 rounded-xl font-bold transition-all duration-300 ${isPassportOpen ? 'bg-[#3D2209]text-white shadow-lg' : 'bg-white text-teal-600 border border-slate-200 hover:bg-teal-50'}`}
+                  style={{
+                    backgroundColor: isPassportOpen ? '#3D2209' : '#3D2209'
+                  }}
                 >
                   <span>完整健康護照 (共 {scheduledItems.length} 項紀錄)</span>
                   <ChevronDown size={20} className={`transition-transform duration-300 ${isPassportOpen ? 'rotate-180' : ''}`} />

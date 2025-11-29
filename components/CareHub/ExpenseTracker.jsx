@@ -110,11 +110,13 @@ export const ExpenseTracker = ({ currentPet, expenses, setExpenses }) => {
             <button
               key={t}
               onClick={() => setTimeframe(t)}
-              className={`px-3 py-1 rounded-md transition-all ${
-                timeframe === t
-                  ? 'bg-white shadow text-slate-800'
-                  : 'text-gray-400'
-              }`}
+              style={{
+                backgroundColor: timeframe === t ? '#3D2209' : '#d1b59aff'
+              }}
+              className={`px-3 py-1 rounded-md transition-all ${timeframe === t
+                ? 'bg-white shadow text-slate-800'
+                : 'text-gray-400'
+                }`}
             >
               {t === 'day' ? '日' : t === 'month' ? '月' : '年'}
             </button>
@@ -135,6 +137,9 @@ export const ExpenseTracker = ({ currentPet, expenses, setExpenses }) => {
           <button
             onClick={() => setIsAdding(true)}
             className="bg-slate-800 text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 shadow-lg active:scale-95"
+            style={{
+              backgroundColor: '#3D2209'
+            }}
           >
             <Plus size={16} /> 記一筆
           </button>
@@ -157,18 +162,16 @@ export const ExpenseTracker = ({ currentPet, expenses, setExpenses }) => {
             {categoryData.map(([cat, amount]) => (
               <div key={cat} className="flex items-center text-xs">
                 <span
-                  className={`w-2 h-2 rounded-full mr-2 ${
-                    EXPENSE_CATEGORIES[cat]?.color || 'bg-gray-400'
-                  }`}
+                  className={`w-2 h-2 rounded-full mr-2 ${EXPENSE_CATEGORIES[cat]?.color || 'bg-gray-400'
+                    }`}
                 ></span>
                 <span className="w-12 text-gray-500">
                   {EXPENSE_CATEGORIES[cat]?.label || '其他'}
                 </span>
                 <div className="flex-1 h-1.5 bg-gray-100 rounded-full mx-2 overflow-hidden">
                   <div
-                    className={`h-full rounded-full ${
-                      EXPENSE_CATEGORIES[cat]?.color || 'bg-gray-400'
-                    }`}
+                    className={`h-full rounded-full ${EXPENSE_CATEGORIES[cat]?.color || 'bg-gray-400'
+                      }`}
                     style={{ width: `${(amount / totalAmount) * 100}%` }}
                   ></div>
                 </div>
@@ -191,9 +194,8 @@ export const ExpenseTracker = ({ currentPet, expenses, setExpenses }) => {
             >
               <div className="flex items-center gap-3">
                 <div
-                  className={`p-2 rounded-full text-white ${
-                    EXPENSE_CATEGORIES[ex.category]?.color || 'bg-gray-400'
-                  }`}
+                  className={`p-2 rounded-full text-white ${EXPENSE_CATEGORIES[ex.category]?.color || 'bg-gray-400'
+                    }`}
                 >
                   <Tag size={16} />
                 </div>
@@ -243,11 +245,10 @@ export const ExpenseTracker = ({ currentPet, expenses, setExpenses }) => {
                   <button
                     key={key}
                     onClick={() => setNewExpense({ ...newExpense, category: key })}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${
-                      newExpense.category === key
-                        ? `${config.color} text-white`
-                        : 'bg-white text-gray-600'
-                    }`}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${newExpense.category === key
+                      ? `${config.color} text-white`
+                      : 'bg-white text-gray-600'
+                      }`}
                   >
                     {config.label}
                   </button>

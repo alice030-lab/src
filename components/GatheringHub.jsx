@@ -9,6 +9,7 @@ export const GatheringHub = ({ gatherings, notificationCount }) => {
   // 樣式設定中心 - 在這裡調整顏色、大小、間距和對齊
   const styles = {
     layout: {
+      backgroundColor: '#fff5ebff',
       paddingTop: '64px', // 上方內距 (避免被標題擋住)
       paddingBottom: '64px', // 下方內距 (避免被底部導航擋住)
       paddingX: '16px', // 左右內距
@@ -46,8 +47,8 @@ export const GatheringHub = ({ gatherings, notificationCount }) => {
         textAlign: 'center', // 文字對齊 (left, center, right)
       },
       secondary: { // 次要按鈕 (尋找保母等)
-        backgroundColor: '#DDCCB5', // 背景顏色
-        color: '#47240A', // 文字顏色
+        backgroundColor: '#47240A', // 背景顏色
+        color: '#f6f1ebff', // 文字顏色
         padding: '8px', // 內距
         borderRadius: '24px', // 圓角大小
         fontSize: '16px', // 文字大小
@@ -69,8 +70,9 @@ export const GatheringHub = ({ gatherings, notificationCount }) => {
 
   return (
     <div
-      className="bg-gray-50 min-h-screen"
+      className="min-h-screen"
       style={{
+        backgroundColor: styles.layout.backgroundColor,
         paddingTop: styles.layout.paddingTop,
         paddingBottom: styles.layout.paddingBottom,
         paddingLeft: styles.layout.paddingX,
@@ -227,7 +229,7 @@ export const GatheringHub = ({ gatherings, notificationCount }) => {
           ))}
         </div>
 
-        <div style={{ marginTop: styles.layout.marginTopSecondary }}>
+        <div style={{ marginTop: '4px' }}>
           <HorizontalScrollSection
             title="探索附近的聚會"
             items={gatherings}

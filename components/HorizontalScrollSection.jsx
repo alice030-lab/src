@@ -60,7 +60,10 @@ export const HorizontalScrollSection = ({ title, items, onItemClick, buttonAlign
                                         </div>
                                     )}
                                 </div>
-                                <button className={`bg-indigo-600 text-white text-xs font-bold py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors shadow-sm shadow-indigo-200 ${textAlignmentClass}`}>
+                                <button
+                                    onClick={() => onItemClick(item)} // 確保點擊事件存在
+                                    className={`text-[#3D2209] text-xs font-bold py-2 px-4 rounded-lg hover:bg-[#3D2209]/10 transition-colors ${textAlignmentClass}`}
+                                    style={{ backgroundColor: '#7a5438ff', border: '1px solid #ffffffff', borderRadius: '28px' }}>
                                     來去參加
                                 </button>
                             </div>

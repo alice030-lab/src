@@ -22,7 +22,7 @@ export const PetSwitcher = ({ currentPet, setCurrentPet, pets, overviewObj }) =>
   };
 
   return (
-    <div className="flex space-x-4 overflow-x-auto pb-2 no-scrollbar px-4">
+    <div className="flex space-x-4 overflow-x-auto py-3 no-scrollbar px-4">
       {/* Overview / "All" button */}
       <button
         onClick={() => setCurrentPet(overviewObj)}
