@@ -111,7 +111,7 @@ export const ExpenseTracker = ({ currentPet, expenses, setExpenses }) => {
               key={t}
               onClick={() => setTimeframe(t)}
               style={{
-                backgroundColor: timeframe === t ? '#3D2209' : '#d1b59aff'
+                backgroundColor: timeframe === t ? '#3D2209' : '#a38b79ff'
               }}
               className={`px-3 py-1 rounded-md transition-all ${timeframe === t
                 ? 'bg-white shadow text-slate-800'
@@ -138,7 +138,7 @@ export const ExpenseTracker = ({ currentPet, expenses, setExpenses }) => {
             onClick={() => setIsAdding(true)}
             className="bg-slate-800 text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 shadow-lg active:scale-95"
             style={{
-              backgroundColor: '#3D2209'
+              backgroundColor: '#3D2209', fontSize: '12px'
             }}
           >
             <Plus size={16} /> 記一筆
@@ -245,7 +245,8 @@ export const ExpenseTracker = ({ currentPet, expenses, setExpenses }) => {
                   <button
                     key={key}
                     onClick={() => setNewExpense({ ...newExpense, category: key })}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${newExpense.category === key
+                    style={{ fontSize: '12px', backgroundColor: '#705038ff' }}
+                    className={`px-3 py-1.5 rounded-lg font-bold border ${newExpense.category === key
                       ? `${config.color} text-white`
                       : 'bg-white text-gray-600'
                       }`}
@@ -264,13 +265,15 @@ export const ExpenseTracker = ({ currentPet, expenses, setExpenses }) => {
             <div className="flex gap-3 mt-6">
               <button
                 onClick={() => setIsAdding(false)}
-                className="flex-1 py-3 bg-gray-100 text-gray-600 rounded-xl font-bold"
+                style={{ fontSize: '12px', backgroundColor: '#705038ff' }}
+                className="flex-1 py-3 text-gray-600 rounded-xl font-bold"
               >
                 取消
               </button>
               <button
                 onClick={handleAddExpense}
-                className="flex-1 py-3 bg-slate-800 text-white rounded-xl font-bold"
+                style={{ fontSize: '12px', backgroundColor: '#705038ff' }}
+                className="flex-1 py-3 text-white rounded-xl font-bold"
               >
                 儲存
               </button>
