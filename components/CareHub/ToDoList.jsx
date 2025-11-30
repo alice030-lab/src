@@ -11,8 +11,8 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
     const styles = {
         //主要顏色
         primaryColor: '#705038ff',      // 主要按鈕顏色
-        secondaryColor: '#a38b79ff',    // 次要按鈕顏色
-        accentColor: '#14b8a6',         // 強調色 (teal)
+        secondaryColor: '#8b705cff',    // 次要按鈕顏色
+        accentColor: '#422603ff',         // 強調色 (teal)
 
         // 背景顏色
         cardBackground: '#ffffff',
@@ -204,14 +204,14 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
                 <div className="flex gap-2">
                     <button
                         onClick={() => setShowCompleted(!showCompleted)}
-                        style={{ backgroundColor: showCompleted ? styles.primaryColor : '#a38b79ff' }}
+                        style={{ backgroundColor: showCompleted ? styles.primaryColor : styles.accentColor }}
                         className={`p-2 rounded-xl transition-all ${showCompleted ? 'text-white shadow-md' : 'text-slate-500 hover:bg-slate-200'}`}
                         title="已完成任務"
                     >
                         <History size={12} />
                     </button>
                     <button
-                        style={{ backgroundColor: styles.secondaryColor }}
+                        style={{ backgroundColor: styles.accentColor }}
                         className="p-2 rounded-xl text-white shadow-md hover:opacity-90 transition-all flex items-center gap-1"
                         title="新增待辦"
                     >
@@ -365,7 +365,7 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
                                 <button
                                     key={cat.id}
                                     onClick={() => { setActiveCategory(cat.id); setShowFilter(false); }}
-                                    style={{ backgroundColor: styles.primaryColor, fontSize: styles.buttonTextSize }}
+                                    style={{ backgroundColor: styles.accentColor, fontSize: styles.buttonTextSize }}
                                     className={`flex items-center gap-2 text-left px-3 py-2 rounded-lg font-medium transition-colors ${activeCategory === cat.id ? 'bg-orange-50 text-orange-700' : 'text-slate-600 hover:bg-slate-50'}`}
                                 >
                                     {cat.icon && <cat.icon size={12} />}
