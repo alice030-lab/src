@@ -100,125 +100,132 @@ export const ExpenseTracker = ({ currentPet, expenses, setExpenses }) => {
 
   return (
     <div className="mt-8 mb-8 animate-in fade-in slide-in-from-bottom-4">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="font-bold text-slate-800 text-lg flex items-center gap-2">
-          <DollarSign size={20} className="text-yellow-500" />
-          財務管家
-        </h3>
-        <div className="bg-gray-100 p-1 rounded-lg flex text-xs font-medium">
-          {['day', 'month', 'year'].map(t => (
-            <button
-              key={t}
-              onClick={() => setTimeframe(t)}
-              style={{
-                backgroundColor: timeframe === t ? '#3D2209' : '#a38b79ff'
-              }}
-              className={`px-3 py-1 rounded-md transition-all ${timeframe === t
-                ? 'bg-white shadow text-slate-800'
-                : 'text-gray-400'
-                }`}
-            >
-              {t === 'day' ? '日' : t === 'month' ? '月' : '年'}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 mb-6">
-        <div className="flex justify-between items-end mb-4">
-          <div>
-            <p className="text-xs text-gray-400 mb-1">
-              {timeframe === 'year' ? '本年度' : timeframe === 'month' ? '本月' : '今日'}總支出
-            </p>
-            <p className="text-3xl font-bold text-slate-800">
-              NT$ {totalAmount.toLocaleString()}
-            </p>
-          </div>
-          <button
-            onClick={() => setIsAdding(true)}
-            className="bg-slate-800 text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 shadow-lg active:scale-95"
-            style={{
-              backgroundColor: '#3D2209', fontSize: '12px'
-            }}
-          >
-            <Plus size={16} /> 記一筆
-          </button>
-        </div>
-
-        <div className="mb-6 border-b border-gray-50 pb-4">
-          <div className="flex items-center gap-2 mb-2">
-            <TrendingUp size={14} className="text-indigo-500" />
-            <span className="text-xs font-bold text-gray-500">消費趨勢</span>
-          </div>
-          <div className="px-2 py-2">{renderTrendChart()}</div>
-        </div>
-
-        <div>
-          <div className="flex items-center gap-2 mb-3">
-            <PieChart size={14} className="text-orange-500" />
-            <span className="text-xs font-bold text-gray-500">分類分析</span>
-          </div>
-          <div className="space-y-2">
-            {categoryData.map(([cat, amount]) => (
-              <div key={cat} className="flex items-center text-xs">
-                <span
-                  className={`w-2 h-2 rounded-full mr-2 ${EXPENSE_CATEGORIES[cat]?.color || 'bg-gray-400'
-                    }`}
-                ></span>
-                <span className="w-12 text-gray-500">
-                  {EXPENSE_CATEGORIES[cat]?.label || '其他'}
-                </span>
-                <div className="flex-1 h-1.5 bg-gray-100 rounded-full mx-2 overflow-hidden">
-                  <div
-                    className={`h-full rounded-full ${EXPENSE_CATEGORIES[cat]?.color || 'bg-gray-400'
-                      }`}
-                    style={{ width: `${(amount / totalAmount) * 100}%` }}
-                  ></div>
-                </div>
-                <span className="font-mono font-bold text-gray-700">
-                  NT${amount}
-                </span>
-              </div>
+      {/* 財務管家卡片容器 */}
+      <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="font-bold text-slate-800 text-lg flex items-center gap-2">
+            <DollarSign size={20} className="text-yellow-500" />
+            財務管家
+          </h3>
+          <div className="bg-gray-100 p-1 rounded-lg flex text-xs font-medium">
+            {['day', 'month', 'year'].map(t => (
+              <button
+                key={t}
+                onClick={() => setTimeframe(t)}
+                style={{
+                  fontSize: '10px',
+                  backgroundColor: timeframe === t ? '#705038ff' : '#a38b79ff'
+                }}
+                className={`px-2 py-1 rounded-md transition-all ${timeframe === t
+                  ? 'bg-white shadow text-slate-800'
+                  : 'text-gray-400'
+                  }`}
+              >
+                {t === 'day' ? '日' : t === 'month' ? '月' : '年'}
+              </button>
             ))}
           </div>
         </div>
-      </div>
 
-      <div className="space-y-3">
-        <h4 className="text-sm font-bold text-slate-600 ml-1">近期明細</h4>
-        {filteredExpenses.length > 0 ? (
-          filteredExpenses.map(ex => (
-            <div
-              key={ex.id}
-              className="bg-white p-3 rounded-xl border border-slate-100 flex items-center justify-between"
-            >
-              <div className="flex items-center gap-3">
-                <div
-                  className={`p-2 rounded-full text-white ${EXPENSE_CATEGORIES[ex.category]?.color || 'bg-gray-400'
-                    }`}
-                >
-                  <Tag size={16} />
-                </div>
-                <div>
-                  <p className="font-bold text-slate-700 text-sm">{ex.title}</p>
-                  <div className="flex items-center gap-2 text-[10px] text-gray-400">
-                    <span>{ex.date}</span>
-                    {currentPet.id === 'all' && (
-                      <span className="bg-slate-100 px-1.5 rounded text-slate-500">
-                        {ex.petId === 'all'
-                          ? '全家'
-                          : MOCK_PETS.find(p => p.id === ex.petId)?.name.split(' ')[0]}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </div>
-              <span className="font-bold text-slate-800">- NT${ex.amount}</span>
+        <div className="bg-slate-50 p-4 rounded-xl mb-4">
+          <div className="flex justify-between items-end mb-4">
+            <div>
+              <p className="text-xs text-gray-400 mb-1">
+                {timeframe === 'year' ? '本年度' : timeframe === 'month' ? '本月' : '今日'}總支出
+              </p>
+              <p className="text-3xl font-bold text-slate-800">
+                NT$ {totalAmount.toLocaleString()}
+              </p>
             </div>
-          ))
-        ) : (
-          <p className="text-center text-gray-400 text-sm py-4">此期間無支出紀錄</p>
-        )}
+            <button
+              onClick={() => setIsAdding(true)}
+              className="bg-slate-800 text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 shadow-lg active:scale-95"
+              style={{
+                fontSize: '10px',
+                backgroundColor: '#705038ff',
+              }}
+            >
+              <Plus size={16} /> 記一筆
+            </button>
+          </div>
+
+          <div className="mb-4 border-b border-gray-200 pb-4">
+            <div className="flex items-center gap-2 mb-2">
+              <TrendingUp size={14} className="text-indigo-500" />
+              <span className="text-xs font-bold text-gray-500">消費趨勢</span>
+            </div>
+            <div className="px-2 py-2">{renderTrendChart()}</div>
+          </div>
+
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <PieChart size={14} className="text-orange-500" />
+              <span className="text-xs font-bold text-gray-500">分類分析</span>
+            </div>
+            <div className="space-y-2">
+              {categoryData.map(([cat, amount]) => (
+                <div key={cat} className="flex items-center text-xs">
+                  <span
+                    className={`w-2 h-2 rounded-full mr-2 ${EXPENSE_CATEGORIES[cat]?.color || 'bg-gray-400'
+                      }`}
+                  ></span>
+                  <span className="w-12 text-gray-500">
+                    {EXPENSE_CATEGORIES[cat]?.label || '其他'}
+                  </span>
+                  <div className="flex-1 h-1.5 bg-gray-100 rounded-full mx-2 overflow-hidden">
+                    <div
+                      className={`h-full rounded-full ${EXPENSE_CATEGORIES[cat]?.color || 'bg-gray-400'
+                        }`}
+                      style={{ width: `${(amount / totalAmount) * 100}%` }}
+                    ></div>
+                  </div>
+                  <span className="font-mono font-bold text-gray-700">
+                    NT${amount}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h4 className="text-sm font-bold text-slate-600 mb-3">近期明細</h4>
+          <div className="space-y-2">
+            {filteredExpenses.length > 0 ? (
+              filteredExpenses.map(ex => (
+                <div
+                  key={ex.id}
+                  className="bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center justify-between"
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className={`p-2 rounded-full text-white ${EXPENSE_CATEGORIES[ex.category]?.color || 'bg-gray-400'
+                        }`}
+                    >
+                      <Tag size={16} />
+                    </div>
+                    <div>
+                      <p className="font-bold text-slate-700 text-sm">{ex.title}</p>
+                      <div className="flex items-center gap-2 text-[10px] text-gray-400">
+                        <span>{ex.date}</span>
+                        {currentPet.id === 'all' && (
+                          <span className="bg-white px-1.5 rounded text-slate-500">
+                            {ex.petId === 'all'
+                              ? '全家'
+                              : MOCK_PETS.find(p => p.id === ex.petId)?.name.split(' ')[0]}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <span className="font-bold text-slate-800">- NT${ex.amount}</span>
+                </div>
+              ))
+            ) : (
+              <p className="text-center text-gray-400 text-sm py-4 bg-slate-50 rounded-xl">此期間無支出紀錄</p>
+            )}
+          </div>
+        </div>
       </div>
 
       {isAdding && (

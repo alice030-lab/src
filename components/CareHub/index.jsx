@@ -310,12 +310,14 @@ export const CareHub = ({
                       </div>
                       <button
                         onClick={() => setCurrentPet(pet)}
-                        className="px-3 py-1 text-xs font-medium bg-slate-50 text-slate-600 rounded-lg hover:bg-slate-100"
+                        className="px-2 py-1 text-xs font-medium bg-slate-50 text-slate-600 rounded-lg hover:bg-slate-100"
+                        style={{ backgroundColor: '#705038ff', fontSize: '10px' }}
                       >
-                        查看詳情
+                        more
                       </button>
                     </div>
-                    <div className="mt-3 flex flex-wrap gap-2">
+                    <div className="mt-3 flex flex-wrap gap-2"
+                    >
                       {issues.length > 0 ? (
                         issues.map((issue, idx) => (
                           <span key={idx} className={`text-xs px-2 py-1 rounded-md font-bold flex items-center gap-1 ${issue.urgent ? 'bg-red-50 text-red-600' : 'bg-amber-50 text-amber-600'}`}>
@@ -391,103 +393,104 @@ export const CareHub = ({
               }))} />
             </div>
 
-            <div className="flex justify-between items-center mb-4">
-              <div className="flex items-center gap-2">
-                <h3 className="font-bold text-slate-800 text-lg flex items-center gap-2">
-                  <Stethoscope size={20} className="text-teal-500" />
-                  健康護照
-                </h3>
-                <select
-                  value={selectedYear}
-                  onChange={(e) => setSelectedYear(parseInt(e.target.value))}
-                  className="text-xs font-bold bg-white border border-slate-200 rounded-lg px-2 py-1 text-slate-600 outline-none focus:border-teal-500"
-                >
-                  {[2023, 2024, 2025, 2026].map(year => (
-                    <option key={year} value={year}>{year}年</option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex gap-2" >
-                {healthItems.length > 0 && (
-                  <button
-                    style={{ backgroundColor: '#a38b79ff', fontSize: '12px' }}
-                    onClick={handleGenerateReport}
-                    disabled={isReportLoading}
-                    className={`font-medium px-2 py-1 rounded-lg border border-indigo-100 flex items-center gap-1 transition-all ${isReportLoading ? 'bg-indigo-200 text-indigo-700' : 'bg-indigo-100 text-indigo-600 hover:bg-indigo-200'}`}
+            {/* 健康護照卡片容器 */}
+            <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 mb-8">
+              <div className="flex justify-between items-center mb-4">
+                <div className="flex items-center gap-2">
+                  <h3 className="font-bold text-slate-800 text-lg flex items-center gap-2">
+                    <Stethoscope size={20} className="text-teal-500" />
+                    健康護照
+                  </h3>
+                  <select
+                    value={selectedYear}
+                    onChange={(e) => setSelectedYear(parseInt(e.target.value))}
+                    className="text-xs font-bold bg-white border border-slate-200 rounded-lg px-2 py-1 text-slate-600 outline-none focus:border-teal-500"
                   >
-                    {isReportLoading ? (
-                      <>
-                        <Loader2 size={8} className="animate-spin" />
-                        AI 分析中...
-                      </>
-                    ) : (
-                      <>
-                        AI分析
-                      </>
-                    )}
+                    {[2023, 2024, 2025, 2026].map(year => (
+                      <option key={year} value={year}>{year}年</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="flex gap-2" >
+                  {healthItems.length > 0 && (
+                    <button
+                      style={{ backgroundColor: '#a38b79ff', fontSize: '12px' }}
+                      onClick={handleGenerateReport}
+                      disabled={isReportLoading}
+                      className={`font-medium px-2 py-1 rounded-lg border border-indigo-100 flex items-center gap-1 transition-all ${isReportLoading ? 'bg-indigo-200 text-indigo-700' : 'bg-indigo-100 text-indigo-600 hover:bg-indigo-200'}`}
+                    >
+                      {isReportLoading ? (
+                        <>
+                          <Loader2 size={8} className="animate-spin" />
+                          AI 分析中...
+                        </>
+                      ) : (
+                        <>
+                          AI分析
+                        </>
+                      )}
+                    </button>
+                  )}
+                  <button style={{ backgroundColor: '#a38b79ff', fontSize: '12px' }} className="text-teal-600 font-medium bg-teal-50 px-2 py-1 rounded-lg border border-teal-100 flex items-center gap-1">
+                    +
                   </button>
-                )}
-                <button style={{ backgroundColor: '#a38b79ff', fontSize: '12px' }} className="text-teal-600 font-medium bg-teal-50 px-2 py-1 rounded-lg border border-teal-100 flex items-center gap-1">
-                  新增紀錄
-                </button>
+                </div>
               </div>
 
-            </div>
-
-            {urgentItems.length > 0 && (
-              <div style={{ backgroundColor: '#ffffffff' }} className="p-4 rounded-xl shadow-md mb-6 border-l-4 border-#d1b59aff">
-                <h4 className="flex items-center text-sm font-bold text-red-600 mb-3">
-                  <AlertCircle size={16} className="mr-1" />
-                  建議立即回診/追蹤項目
-                </h4>
-                <div className="space-y-3">
-
-                  {urgentItems.map(item => (
-                    <div key={item.id} className="flex justify-between items-center p-3 bg-white rounded-lg border border-red-200 shadow-sm">
-                      <div>
-                        <p className="font-bold text-slate-800 text-sm">{item.name}</p>
-                        {item.note && <p className="text-xs text-red-500">{item.note}</p>}
+              {urgentItems.length > 0 && (
+                <div style={{ backgroundColor: '#fff5f5' }} className="p-4 rounded-xl mb-4 border-l-4 border-red-400">
+                  <h4 className="flex items-center text-sm font-bold text-red-600 mb-3">
+                    <AlertCircle size={16} className="mr-1" />
+                    建議立即回診/追蹤項目
+                  </h4>
+                  <div className="space-y-3">
+                    {urgentItems.map(item => (
+                      <div key={item.id} className="flex justify-between items-center p-3 bg-white rounded-lg border border-red-200 shadow-sm">
+                        <div>
+                          <p className="font-bold text-slate-800 text-sm">{item.name}</p>
+                          {item.note && <p className="text-xs text-red-500">{item.note}</p>}
+                        </div>
+                        <span className="text-xs text-red-700 font-bold bg-red-100 px-2 py-1 rounded-full">
+                          {item.nextDue ? `過期於 ${item.nextDue}` : '數值異常'}
+                        </span>
                       </div>
-                      <span className="text-xs text-red-700 font-bold bg-red-100 px-2 py-1 rounded-full">
-                        {item.nextDue ? `過期於 ${item.nextDue}` : '數值異常'}
-                      </span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {scheduledItems.length > 0 && (
-              <div className="mb-8" >
-                <button
-                  onClick={() => setIsPassportOpen(!isPassportOpen)}
-                  className={`w-full flex justify-between items-center p-4 rounded-xl font-bold transition-all duration-300 ${isPassportOpen ? 'bg-[#3D2209]text-white shadow-lg' : 'bg-white text-teal-600 border border-slate-200 hover:bg-teal-50'}`}
-                  style={{
-                    backgroundColor: isPassportOpen ? '#3D2209' : '#3D2209'
-                  }}
-                >
-                  <span>完整健康護照 (共 {scheduledItems.length} 項紀錄)</span>
-                  <ChevronDown size={20} className={`transition-transform duration-300 ${isPassportOpen ? 'rotate-180' : ''}`} />
-                </button>
+              {scheduledItems.length > 0 && (
+                <div>
+                  <button
+                    onClick={() => setIsPassportOpen(!isPassportOpen)}
+                    className={`w-full flex justify-between items-center p-4 rounded-xl font-bold transition-all duration-300 ${isPassportOpen ? 'bg-[#3D2209]text-white shadow-lg' : 'bg-white text-teal-600 border border-slate-200 hover:bg-teal-50'}`}
+                    style={{
+                      backgroundColor: isPassportOpen ? '#3D2209' : '#3D2209'
+                    }}
+                  >
+                    <span>完整健康護照 (共 {scheduledItems.length} 項紀錄)</span>
+                    <ChevronDown size={20} className={`transition-transform duration-300 ${isPassportOpen ? 'rotate-180' : ''}`} />
+                  </button>
 
-                <div
-                  className="transition-all duration-500 ease-in-out overflow-hidden"
-                  style={{
-                    maxHeight: isPassportOpen ? '1500px' : '0',
-                    opacity: isPassportOpen ? 1 : 0,
-                    paddingTop: isPassportOpen ? '1rem' : '0'
-                  }}
-                >
-                  <HealthSection items={scheduledItems} />
+                  <div
+                    className="transition-all duration-500 ease-in-out overflow-hidden"
+                    style={{
+                      maxHeight: isPassportOpen ? '1500px' : '0',
+                      opacity: isPassportOpen ? 1 : 0,
+                      paddingTop: isPassportOpen ? '1rem' : '0'
+                    }}
+                  >
+                    <HealthSection items={scheduledItems} />
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {urgentItems.length === 0 && scheduledItems.length === 0 && (
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 text-center text-slate-400 text-sm">
-                尚無詳細健檢紀錄
-              </div>
-            )}
+              {urgentItems.length === 0 && scheduledItems.length === 0 && (
+                <div className="bg-slate-50 p-6 rounded-xl text-center text-slate-400 text-sm">
+                  尚無詳細健檢紀錄
+                </div>
+              )}
+            </div>
 
             {/* 財務管家 */}
             <ExpenseTracker currentPet={currentPet} expenses={expenses} setExpenses={setExpenses} />
