@@ -7,6 +7,36 @@ import {
 import { MOCK_PETS } from '../../data/mockData';
 
 export const ToDoList = ({ currentPet, initialTasks = [] }) => {
+    // ===== 樣式配置中心 =====
+    const styles = {
+        //主要顏色
+        primaryColor: '#705038ff',      // 主要按鈕顏色
+        secondaryColor: '#a38b79ff',    // 次要按鈕顏色
+        accentColor: '#14b8a6',         // 強調色 (teal)
+
+        // 背景顏色
+        cardBackground: '#ffffff',
+        completedBackground: '#f8fafc',
+        emptyStateBackground: '#f8fafc',
+
+        // 文字顏色
+        primaryText: '#1e293b',
+        secondaryText: '#64748b',
+        mutedText: '#94a3b8',
+
+        // 邊框顏色
+        borderColor: '#e2e8f0',
+
+        // 按鈕文字大小
+        buttonTextSize: '10px',
+
+        // 過濾器顏色
+        filterActive: {
+            calendar: { bg: '#f0fdfa', border: '#99f6e4', text: '#0f766e' },
+            category: { bg: '#fff7ed', border: '#fed7aa', text: '#c2410c' }
+        }
+    };
+
     const [activeCategory, setActiveCategory] = useState('all');
     const [showCompleted, setShowCompleted] = useState(false);
     const [showCalendar, setShowCalendar] = useState(false);
@@ -174,18 +204,18 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
                 <div className="flex gap-2">
                     <button
                         onClick={() => setShowCompleted(!showCompleted)}
-                        style={{ backgroundColor: showCompleted ? '#705038ff' : '#f1f5f9' }}
+                        style={{ backgroundColor: showCompleted ? styles.primaryColor : '#a38b79ff' }}
                         className={`p-2 rounded-xl transition-all ${showCompleted ? 'text-white shadow-md' : 'text-slate-500 hover:bg-slate-200'}`}
                         title="已完成任務"
                     >
-                        <History size={18} />
+                        <History size={12} />
                     </button>
                     <button
-                        style={{ backgroundColor: '#705038ff' }}
+                        style={{ backgroundColor: styles.secondaryColor }}
                         className="p-2 rounded-xl text-white shadow-md hover:opacity-90 transition-all flex items-center gap-1"
                         title="新增待辦"
                     >
-                        <Plus size={18} />
+                        <Plus size={12} />
                     </button>
                 </div>
             </div>
@@ -196,9 +226,10 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
                 <div className="relative">
                     <button
                         onClick={() => { setShowCalendar(!showCalendar); setShowFilter(false); setPickerDate(selectedDate); }}
-                        className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all border ${showCalendar ? 'bg-teal-50 border-teal-200 text-teal-700' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                        style={{ backgroundColor: styles.secondaryColor, fontSize: styles.buttonTextSize }}
+                        className={`flex items-center gap-2 px-3 py-1.5 rounded-lg font-bold transition-all border ${showCalendar ? 'bg-teal-50 border-teal-200 text-teal-700' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
                     >
-                        <Calendar size={14} />
+                        <Calendar size={12} />
                         {getDisplayDate()}
                         <ChevronDown size={12} className={`transition-transform ${showCalendar ? 'rotate-180' : ''}`} />
                     </button>
@@ -212,7 +243,8 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
                                     <button
                                         key={mode}
                                         onClick={() => setViewMode(mode)}
-                                        className={`flex-1 py-1 text-xs font-bold rounded-md transition-all ${viewMode === mode ? 'bg-white text-teal-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
+                                        style={{ backgroundColor: viewMode === mode ? styles.primaryColor : '#a38b79ff', fontSize: styles.buttonTextSize }}
+                                        className={`flex-1 py-1 font-bold rounded-md transition-all ${viewMode === mode ? 'bg-white text-teal-700 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
                                     >
                                         {mode === 'day' ? '日' : mode === 'month' ? '月' : '年'}
                                     </button>
@@ -221,8 +253,9 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
 
                             {/* Calendar Header */}
                             <div className="flex justify-between items-center mb-4">
-                                <button onClick={handlePrev} className="p-1 hover:bg-slate-100 rounded-full text-slate-600">
-                                    <ChevronLeft size={16} />
+                                <button onClick={handlePrev} className="p-1 hover:bg-slate-100 rounded-full text-slate-600"
+                                >
+                                    <ChevronLeft size={12} />
                                 </button>
                                 <span className="font-bold text-slate-800">
                                     {viewMode === 'day' && `${pickerDate.getFullYear()}年 ${pickerDate.getMonth() + 1}月`}
@@ -230,7 +263,7 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
                                     {viewMode === 'year' && `${yearsList[0]} - ${yearsList[yearsList.length - 1]}`}
                                 </span>
                                 <button onClick={handleNext} className="p-1 hover:bg-slate-100 rounded-full text-slate-600">
-                                    <ChevronRight size={16} />
+                                    <ChevronRight size={12} />
                                 </button>
                             </div>
 
@@ -251,7 +284,8 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
                                                 <button
                                                     key={idx}
                                                     onClick={() => handleDateSelect(date)}
-                                                    className={`h-8 w-8 rounded-full text-xs font-medium flex items-center justify-center transition-all ${isSelected ? 'bg-[#705038ff] text-white shadow-md' : isToday ? 'bg-teal-50 text-teal-600 font-bold border border-teal-200' : 'text-slate-600 hover:bg-slate-100'}`}
+                                                    style={{ fontSize: styles.buttonTextSize, backgroundColor: isSelected ? styles.primaryColor : undefined }}
+                                                    className={`h-8 w-8 rounded-full font-medium flex items-center justify-center transition-all ${isSelected ? 'text-white shadow-md' : isToday ? 'bg-teal-50 text-teal-600 font-bold border border-teal-200' : 'text-slate-600 hover:bg-slate-100'}`}
                                                 >
                                                     {date.getDate()}
                                                 </button>
@@ -270,7 +304,8 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
                                             <button
                                                 key={i}
                                                 onClick={() => handleMonthSelect(i)}
-                                                className={`py-2 rounded-lg text-sm font-medium transition-all ${isSelected ? 'bg-[#705038ff] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100'}`}
+                                                style={{ fontSize: styles.buttonTextSize, backgroundColor: isSelected ? styles.primaryColor : undefined }}
+                                                className={`py-2 rounded-lg font-medium transition-all ${isSelected ? 'text-white shadow-md' : 'text-slate-600 hover:bg-slate-100'}`}
                                             >
                                                 {i + 1}月
                                             </button>
@@ -288,7 +323,8 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
                                             <button
                                                 key={year}
                                                 onClick={() => handleYearSelect(year)}
-                                                className={`py-2 rounded-lg text-sm font-medium transition-all ${isSelected ? 'bg-[#705038ff] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100'}`}
+                                                style={{ fontSize: styles.buttonTextSize, backgroundColor: isSelected ? styles.primaryColor : undefined }}
+                                                className={`py-2 rounded-lg font-medium transition-all ${isSelected ? 'text-white shadow-md' : 'text-slate-600 hover:bg-slate-100'}`}
                                             >
                                                 {year}
                                             </button>
@@ -301,7 +337,8 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
                             <div className="mt-4 pt-3 border-t border-slate-100 flex justify-center">
                                 <button
                                     onClick={() => { setSelectedDate(new Date()); setPickerDate(new Date()); setShowCalendar(false); }}
-                                    className="text-xs font-bold text-teal-600 hover:text-teal-700"
+                                    style={{ fontSize: styles.buttonTextSize }}
+                                    className="font-bold text-teal-600 hover:text-teal-700"
                                 >
                                     回到今天
                                 </button>
@@ -314,7 +351,8 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
                 <div className="relative">
                     <button
                         onClick={() => { setShowFilter(!showFilter); setShowCalendar(false); }}
-                        className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all border ${showFilter ? 'bg-orange-50 border-orange-200 text-orange-700' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
+                        style={{ backgroundColor: styles.secondaryColor, fontSize: styles.buttonTextSize }}
+                        className={`flex items-center gap-2 px-3 py-1.5 rounded-lg font-bold transition-all border ${showFilter ? 'bg-orange-50 border-orange-200 text-orange-700' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}
                     >
                         <Filter size={14} />
                         {categories.find(c => c.id === activeCategory)?.label || '篩選'}
@@ -327,7 +365,8 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
                                 <button
                                     key={cat.id}
                                     onClick={() => { setActiveCategory(cat.id); setShowFilter(false); }}
-                                    className={`flex items-center gap-2 text-left px-3 py-2 rounded-lg text-xs font-medium transition-colors ${activeCategory === cat.id ? 'bg-orange-50 text-orange-700' : 'text-slate-600 hover:bg-slate-50'}`}
+                                    style={{ backgroundColor: styles.primaryColor, fontSize: styles.buttonTextSize }}
+                                    className={`flex items-center gap-2 text-left px-3 py-2 rounded-lg font-medium transition-colors ${activeCategory === cat.id ? 'bg-orange-50 text-orange-700' : 'text-slate-600 hover:bg-slate-50'}`}
                                 >
                                     {cat.icon && <cat.icon size={12} />}
                                     {cat.label}
@@ -347,7 +386,7 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
                             已完成任務 ({completedTasks.length})
                         </h4>
                         <button onClick={() => setShowCompleted(false)} className="text-slate-400 hover:text-slate-600">
-                            <X size={14} />
+                            <X size={10} />
                         </button>
                     </div>
 
@@ -363,7 +402,8 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
                                     </div>
                                     <button
                                         onClick={() => restoreTask(task.id)}
-                                        className="text-[10px] bg-slate-100 text-slate-600 px-2 py-1 rounded hover:bg-slate-200 flex items-center gap-1 transition-colors"
+                                        style={{ fontSize: styles.buttonTextSize }}
+                                        className="bg-slate-100 text-slate-600 px-2 py-1 rounded hover:bg-slate-200 flex items-center gap-1 transition-colors"
                                     >
                                         <RotateCcw size={10} />
                                         還原
@@ -426,16 +466,16 @@ export const ToDoList = ({ currentPet, initialTasks = [] }) => {
                                 <div className="mt-3 flex justify-end gap-2">
                                     <button
                                         onClick={() => handleReschedule(task.id)}
-                                        style={{ backgroundColor: '#a38b79ff' }}
-                                        className="text-[10px] font-medium text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors hover:opacity-90"
+                                        style={{ backgroundColor: styles.secondaryColor, fontSize: styles.buttonTextSize }}
+                                        className="font-medium text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors hover:opacity-90"
                                     >
                                         <RefreshCw size={12} />
                                         改期
                                     </button>
                                     <button
                                         onClick={() => toggleComplete(task.id)}
-                                        style={{ backgroundColor: '#705038ff' }}
-                                        className="text-[10px] font-medium text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors hover:opacity-90"
+                                        style={{ backgroundColor: styles.primaryColor, fontSize: styles.buttonTextSize }}
+                                        className="font-medium text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors hover:opacity-90"
                                     >
                                         <CheckCircle size={12} />
                                         完成
