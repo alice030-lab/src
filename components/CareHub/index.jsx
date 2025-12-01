@@ -108,7 +108,7 @@ export const CareHub = ({
   const styles = {
     layout: {
       paddingTop: '-10px',
-      backgroundColor: '#fff5ebff',
+      backgroundColor: '#fefbf5e6',
     },
     header: {
       backgroundColor: '#86572C',
